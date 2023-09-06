@@ -36,5 +36,4 @@ describe Person do
     @person1.rental(@rental)
     expect(@person1.rentals).to be_truthy
   end
-  
 end
