@@ -3,6 +3,7 @@ require_relative 'person'
 require_relative 'teacher'
 require_relative 'rental'
 require_relative 'student'
+require 'json'
 
 class App
   attr_accessor :all_books, :all_people, :all_rentals
@@ -13,13 +14,32 @@ class App
     @all_rentals = []
   end
 
+  def init_arrays
+    if File.exist?('people.json')
+      people_json_data = File.read('people.json')
+      @all_people = JSON.parse(people_json_data) unless people_json_data.empty?
+    end
+
+    if File.exist?('books.json')
+      books_json_data = File.read('books.json')
+      @all_books = JSON.parse(books_json_data) unless books_json_data.empty?
+    end
+
+    return unless File.exist?('rentals.json')
+
+    rentals_json_data = File.read('rentals.json')
+    @all_rentals = JSON.parse(rentals_json_data) unless rentals_json_data.empty?
+  end
+
   def books
+    puts 'No books available' if @all_books.empty?
     @all_books.each_with_index do |book, index|
       puts "#{index}) #{book}"
     end
   end
 
   def people
+    puts 'No teacher(s) or student(s)' if @all_people.empty?
     @all_people.each_with_index do |person, index|
       puts "#{index}) #{person}"
     end
@@ -91,9 +111,22 @@ class App
   end
 
   def all_personal_rentals(id)
+    puts '** No rentals available **' if @all_rentals.empty?
     person_rental = @all_rentals.select do |rental|
       rental.person.id == id
     end
     puts person_rental
+  end
+
+  def save
+    rentals_data = @all_rentals.to_json
+    people_data = @all_people.to_json
+    books_data = @all_books.to_json
+
+    File.write('rentals.json', rentals_data)
+
+    File.write('books.json', books_data)
+
+    File.write('people.json', people_data)
   end
 end
