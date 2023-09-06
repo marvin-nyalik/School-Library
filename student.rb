@@ -17,6 +17,6 @@ class Student < Person
   end
 
   def to_s
-    "Student: #{@name}, Age: #{@age}, Parent Permission: #{@parent_permission} ID:#{@id}"
+    "[Student] Name: #{@name}, Age: #{@age}, Parent Permission: #{@parent_permission}, ID:#{@id}"
   end
 end
