@@ -5,7 +5,7 @@ class Teacher < Person
     super(age, name)
   end
 
-  def can_use_services
+  def can_use_services?
     true
   end
 
