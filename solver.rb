@@ -10,4 +10,22 @@ class Solver
     fact
   end
 
+  def fizzbuzz(number)
+    return 'fizzbuzz' if (number % 3).zero? && (number % 5).zero?
+    return 'fizz' if (number % 3).zero?
+    return 'buzz' if (number % 5).zero?
+    number.to_s
+  end
+  
+  def reverse(string)
+    left = 0
+    right = string.size - 1
+    while left <= right
+      string[left], string[right] = string[right], string[left]
+      left += 1
+      right -= 1
+    end
+    string
+  end
+
 end
