@@ -17,4 +17,11 @@ describe Solver do
     expect { @solver.factorial(-14) }.to raise_error(RangeError, 'Only positive values allowed')
   end
 
+  it 'returns the correct string' do
+    expect(@solver.fizzbuzz(15)).to eq('fizzbuzz')
+    expect(@solver.fizzbuzz(6)).to eq('fizz')
+    expect(@solver.fizzbuzz(10)).to eq('buzz')
+    expect(@solver.fizzbuzz(7)).to eq('7')
+  end
+  
 end
